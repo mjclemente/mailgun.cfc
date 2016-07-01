@@ -34,6 +34,12 @@ component output="false" displayname="MainGun.cfc"  {
     return this;
   }
 
+  //VALIDATION
+  public struct function validate( required string address ) {
+
+    return apiCall( "/address/validate", setupParams( arguments ), "get", false );
+  }
+
   public struct function sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } ) {
 
     return apiCall( "/#trim( domain )#/messages", setupParams( arguments ), "post" );
