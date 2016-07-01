@@ -28,7 +28,7 @@ component output="false" displayname="MainGun.cfc"  {
     v = { required = [ ], optional = [ ] }
   };
 
-  public any function init( required string apiKey, string domain = "", string baseUrl = "https://api.mailgun.net/v3", boolean forceTestMode = false, numeric httpTimeout = 60, boolean includeRaw = true ) {
+  public any function init( required string secretApiKey, required string publicApiKey, string domain = "", string baseUrl = "https://api.mailgun.net/v3", boolean forceTestMode = false, numeric httpTimeout = 60, boolean includeRaw = true ) {
 
     structAppend( variables, arguments );
     return this;
@@ -67,13 +67,13 @@ component output="false" displayname="MainGun.cfc"  {
 
 
   // PRIVATE FUNCTIONS
-  private struct function apiCall( required string path, array params = [ ], string method = "get" )  {
+  private struct function apiCall( required string path, array params = [ ], string method = "get", boolean private = true )  {
 
     var fullApiPath = variables.baseUrl & path;
     var requestStart = getTickCount();
 
 
-    var apiResponse = makeHttpRequest( urlPath = fullApiPath, params = params, method = method );
+    var apiResponse = makeHttpRequest( urlPath = fullApiPath, params = params, method = method, private = private );
 
     var result = { "api_request_time" = getTickCount() - requestStart, "status_code" = listFirst( apiResponse.statuscode, " " ), "status_text" = listRest( apiResponse.statuscode, " " ) };
     if ( variables.includeRaw ) {
@@ -84,8 +84,8 @@ component output="false" displayname="MainGun.cfc"  {
     return result;
   }
 
-  private any function makeHttpRequest( required string urlPath, required array params, required string method ) {
-    var http = new http( url = urlPath, method = method, username = "api", password = variables.apiKey, timeout = variables.httpTimeout );
+  private any function makeHttpRequest( required string urlPath, required array params, required string method, required boolean private ) {
+    var http = new http( url = urlPath, method = method, username = "api", password = private ? secretApiKey : publicApiKey, timeout = variables.httpTimeout );
 
     // adding a user agent header so that Adobe ColdFusion doesn't get mad about empty HTTP posts
     http.addParam( type = "header", name = "User-Agent", value = "mailgun.cfc" );

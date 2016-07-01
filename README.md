@@ -7,4 +7,4 @@ This is still in the early stages.
 
 # Getting Started
 
-	mailGun = new com.mailgun( apiKey = 'key-xxx', domain = 'yourdomain.com', baseUrl = 'https://api.mailgun.net/v3' );
+	mailGun = new com.mailgun( secretApiKey = 'key-xxx', publicApiKey = 'pubkey-xxx', domain = 'yourdomain.com', baseUrl = 'https://api.mailgun.net/v3' );
