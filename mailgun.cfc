@@ -208,11 +208,6 @@ component output="false" displayname="MainGun.cfc"  {
     // only simple values
     if ( !isSimpleValue( paramValue ) ) throwError( "'#paramName#' is not a simple value." );
 
-    // if not validation just result trimmed value
-    if ( !validate ) {
-      return trim( paramValue );
-    }
-
     // integer
     if ( arrayFindNoCase( variables.integerFields, paramName ) ) {
       if ( !isInteger( paramValue ) ) {
@@ -239,7 +234,7 @@ component output="false" displayname="MainGun.cfc"  {
     }
 
     // default is string
-    return trim( paramValue );
+    return paramValue;
   }
 
   private void function parseResult( required struct result ) {
