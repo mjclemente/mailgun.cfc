@@ -81,6 +81,14 @@ component output="false" displayname="MainGun.cfc"  {
 
     var apiResponse = makeHttpRequest( urlPath = fullApiPath, params = params, method = method, private = private );
 
+    if ( val( apiResponse.Statuscode ) >= 400 ) {
+      var detail = "";
+      if ( structKeyExists( apiResponse, "Responseheader" ) && structKeyExists( apiResponse.Responseheader, "Explanation" ) ) {
+        detail = apiResponse.Responseheader.Explanation;
+      }
+      throwError( "error placing API call '#path#'.", detail );
+    }
+
     var result = { "api_request_time" = getTickCount() - requestStart, "status_code" = listFirst( apiResponse.statuscode, " " ), "status_text" = listRest( apiResponse.statuscode, " " ) };
     if ( variables.includeRaw ) {
       result[ "raw" ] = { "method" = ucase( method ), "path" = fullApiPath, "params" = serializeJSON( params ), "response" = apiResponse.fileContent };
@@ -274,8 +282,8 @@ component output="false" displayname="MainGun.cfc"  {
     return replacelist( urlEncodedFormat( str, "utf-8" ), "%2D,%2E,%5F,%7E", "-,.,_,~" );
   }
 
-  private void function throwError( required string errorMessage ) {
-    throw( type = "MailGun", message = "(mailgun.cfc) " & errorMessage );
+  private void function throwError( required string errorMessage, string detail = "" ) {
+    throw( type = "MailGun", message = "(mailgun.cfc) " & errorMessage, detail = detail );
   }
 
 }
