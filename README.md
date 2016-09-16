@@ -11,7 +11,7 @@ Currently both your Secret API Key and your Public API Key must be provided. The
 
 # Getting Started
 
-```ColdFusion CFC
+```cfc
 mailGun = new com.mailgun( secretApiKey = 'key-xxx', publicApiKey = 'pubkey-xxx', domain = 'yourdomain.com', baseUrl = 'https://api.mailgun.net/v3' );
 ```
 
@@ -20,25 +20,25 @@ mailGun = new com.mailgun( secretApiKey = 'key-xxx', publicApiKey = 'pubkey-xxx'
 
 #### Validation: <https://documentation.mailgun.com/api-email-validation.html>
 
-```coldfusion
+```cfc
 validate( required string address )
 ```
 	
 #### Messages: <https://documentation.mailgun.com/api-sending.html>
 	
-```coldfusion
+```cfc
 sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } )
 ```
 
 #### Supressions: <https://documentation.mailgun.com/api-suppressions.html>
 
-```coldfusion
+```cfc
 getBounces( string domain = variables.domain, numeric limit = 100 )
 ```
 
 #### Mailing Lists: <https://documentation.mailgun.com/api-mailinglists.html>
 
-```coldfusion
+```cfc
 getLists()
 
 getList( required string listaddress, numeric limit = 100, numeric skip = 0 )
