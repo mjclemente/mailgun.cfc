@@ -11,7 +11,7 @@ Currently both your Secret API Key and your Public API Key must be provided. The
 
 # Getting Started
 
-```coldfusion
+```ColdFusion CFC
 mailGun = new com.mailgun( secretApiKey = 'key-xxx', publicApiKey = 'pubkey-xxx', domain = 'yourdomain.com', baseUrl = 'https://api.mailgun.net/v3' );
 ```
 
