@@ -23,9 +23,9 @@ mailGun = new com.mailgun( secretApiKey = 'key-xxx', publicApiKey = 'pubkey-xxx'
 ```cfc
 validate( required string address )
 ```
-	
+
 #### Messages: <https://documentation.mailgun.com/api-sending.html>
-	
+
 ```cfc
 sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } )
 ```
@@ -43,9 +43,24 @@ getLists()
 
 getList( required string listaddress, numeric limit = 100, numeric skip = 0 )
 
+createList( required string address, string name = "", string description = "", access_level = "readonly" )
+
 createListMember( required string listaddress, required string address, string name, string vars, boolean subscribed = true, boolean upsert = false )
+
+createListMembers( required string listaddress, required json members, boolean upsert = false )
 ```
 
 # Changelog
-	
-	
+
+## 2016-12-29
+
+Thanks @mjhagen
+
+### Added
+* Two list management functions:
+ * createList()
+ * createListMembers()
+
+### Changed
+* Expanded the error reporting by deserializing the returned message
+and adding that to the error detail.
