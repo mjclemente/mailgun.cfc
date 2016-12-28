@@ -56,6 +56,29 @@ component output="false" displayname="MainGun.cfc"  {
     return apiCall( "/lists/#trim( listaddress )#", setupParams( arguments ), "get" );
   }
 
+  /**
+   * address      A valid email address for the mailing list, e.g. developers@mailgun.net, or Developers <devs@mg.net>
+   * name         Mailing list name, e.g. Developers (optional)
+   * description  A description (optional)
+   * access_level List access level, one of: readonly (default), members, everyone
+   */
+  public struct function createList( required string address, string name = "", string description = "", access_level = "readonly" ) {
+    return apiCall( "/lists", setupParams( arguments ), "post" );
+  }
+
+  public struct function createListMembers( required string listaddress, required json members, boolean upsert = false ) {
+    return apiCall(
+      "/lists/#listaddress#/members.json",
+      setupParams(
+        {
+          "members" = members,
+          "upsert" = upsert
+        }
+      ),
+      "post"
+    );
+  }
+
   //skipped implementing a few here
 
   //need a better way to handle the 'vars' field
@@ -83,7 +106,16 @@ component output="false" displayname="MainGun.cfc"  {
 
     if ( val( apiResponse.Statuscode ) >= 400 ) {
       var detail = "";
-      if ( structKeyExists( apiResponse, "Responseheader" ) && structKeyExists( apiResponse.Responseheader, "Explanation" ) ) {
+
+      if ( structKeyExists( apiResponse, "Filecontent" ) && isJson( apiResponse.Filecontent ) ) {
+        var deserializedFilecontent = deserializeJSON( apiResponse.fileContent );
+
+        if ( isStruct( deserializedFilecontent ) && structKeyExists( deserializedFilecontent, "message" ) ) {
+          detail = deserializedFilecontent.message;
+        }
+      } else if ( structKeyExists( apiResponse, "ErrorDetail" ) && len( apiResponse.ErrorDetail ) ) {
+        detail = apiResponse.ErrorDetail;
+      } else if ( structKeyExists( apiResponse, "Responseheader" ) && structKeyExists( apiResponse.Responseheader, "Explanation" ) ) {
         detail = apiResponse.Responseheader.Explanation;
       }
       throwError( "error placing API call '#path#'.", detail );
