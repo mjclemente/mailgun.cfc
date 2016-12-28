@@ -66,6 +66,14 @@ component output="false" displayname="MainGun.cfc"  {
     return apiCall( "/lists", setupParams( arguments ), "post" );
   }
 
+  //skipped implementing a few here
+
+  //need a better way to handle the 'vars' field
+  public struct function createListMember( required string listaddress, required string address, string name, string vars, boolean subscribed = true, boolean upsert = false  ) {
+
+    return apiCall( "/lists/#trim( listaddress )#/members", setupParams( arguments ), "post" );
+  }
+
   public struct function createListMembers( required string listaddress, required json members, boolean upsert = false ) {
     return apiCall(
       "/lists/#listaddress#/members.json",
@@ -77,14 +85,6 @@ component output="false" displayname="MainGun.cfc"  {
       ),
       "post"
     );
-  }
-
-  //skipped implementing a few here
-
-  //need a better way to handle the 'vars' field
-  public struct function createListMember( required string listaddress, required string address, string name, string vars, boolean subscribed = true, boolean upsert = false  ) {
-
-    return apiCall( "/lists/#trim( listaddress )#/members", setupParams( arguments ), "post" );
   }
 
   //Supressions
