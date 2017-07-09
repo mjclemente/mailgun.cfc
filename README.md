@@ -7,7 +7,7 @@ Your account credentials can be found on the dashboard of your Mailgun account: 
 
 ![Mailgun API Keys](/assets/images/api-keys.png)
 
-Currently both your Secret API Key and your Public API Key must be provided. The former is used for most operations, but the latter is used for email validation calls.
+Currently both your Secret API Key and your Public API Key must be provided. The Secret API Key is used for most operations. In prior versions, email validation calls used the Public API Key. However, now that Mailgun has moved to a usage based pricing model for their email validation, the default for email validation calls is also to use the Secret API Key. The Public API Key requirement will likely be removed in later versions. It's currently included, so that calls can explicitly be made to the public endpoint of the email validation API.
 
 # Getting Started
 
@@ -21,7 +21,7 @@ mailGun = new com.mailgun( secretApiKey = 'key-xxx', publicApiKey = 'pubkey-xxx'
 #### Validation: <https://documentation.mailgun.com/api-email-validation.html>
 
 ```cfc
-validate( required string address )
+validate( required string address, boolean mailbox_verification = false, boolean private = true )
 ```
 
 #### Messages: <https://documentation.mailgun.com/api-sending.html>
@@ -51,6 +51,16 @@ createListMembers( required string listaddress, required json members, boolean u
 ```
 
 # Changelog
+
+## 2017-07-09
+
+### Added
+* Option `mailbox_verification`, to validate(), to enable a mailbox verification check to be performed against the address.
+* Option `private`, to validate(), to override default and call public API endpoint
+
+### Changed
+* validate() now defaults to the private API endpoint
+
 
 ## 2016-12-29
 
