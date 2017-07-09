@@ -1,5 +1,6 @@
 /*
   Copyright (c) 2015, Matthew Clemente, John Berquist
+  v0.2.0
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -19,7 +20,7 @@ component output="false" displayname="MainGun.cfc"  {
   variables.integerFields = [ "limit", "skip" ];
   variables.numericFields = [  ];
   variables.timestampFields = [ "deliverytime" ];
-  variables.booleanFields = [ "dkim", "testmode", "tracking", "tracking-clicks", "tracking-opens", "require-tls", "skip-verification", "subscribed", "upsert" ];
+  variables.booleanFields = [ "mailbox_verification", "dkim", "testmode", "tracking", "tracking-clicks", "tracking-opens", "require-tls", "skip-verification", "subscribed", "upsert" ];
   variables.arrayFields = [ "attachment", "inline", "tag" ];
   variables.fileFields = [ "attachment", "inline" ];
   variables.dictionaryFields = {
@@ -35,9 +36,9 @@ component output="false" displayname="MainGun.cfc"  {
   }
 
   //VALIDATION
-  public struct function validate( required string address ) {
+  public struct function validate( required string address, boolean mailbox_verification = false, boolean private = true ) {
 
-    return apiCall( "/address/validate", setupParams( arguments ), "get", false );
+    return apiCall( "/address#private ? '/private' : ''#/validate", setupParams( arguments ), "get", private );
   }
 
   public struct function sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } ) {
