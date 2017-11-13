@@ -105,7 +105,9 @@ component output="false" displayname="MainGun.cfc"  {
   // PRIVATE FUNCTIONS
   private struct function apiCall( required string path, array params = [ ], string method = "get", boolean private = true )  {
 
-    var fullApiPath = variables.baseUrl & path;
+    //if relative path (default), append to base. If not, assume full url (retrieving messages), and use it
+    var fullApiPath = path.left( 1 ) == '/' ? variables.baseUrl & path : path;
+
     var requestStart = getTickCount();
 
 
