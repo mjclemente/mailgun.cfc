@@ -304,7 +304,7 @@ component output="false" displayname="MainGun.cfc"  {
             if ( isStruct( item ) ) parseResult( item );
           }
         }
-        if ( arrayFindNoCase( variables.timestampFields, key ) ) result[ key ] = parseUTCTimestamp( result[ key ] );
+        if ( arrayFindNoCase( variables.timestampFields, key ) ) result[ key ] = parseUTCTimestampField( result[ key ], key );
       }
     }
   }
