@@ -28,12 +28,20 @@ validate( required string address, boolean mailbox_verification = false, boolean
 
 ```cfc
 sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } )
+
+getStoredMessage( required string messageUrl )
 ```
 
 #### Supressions: <https://documentation.mailgun.com/api-suppressions.html>
 
 ```cfc
 getBounces( string domain = variables.domain, numeric limit = 100 )
+```
+
+#### Stats: <https://documentation.mailgun.com/en/latest/api-stats.html>
+
+```cfc
+getStats( string domain = variables.domain, required string event, date start = '#now()#-7', date end = '#now()#', string resolution = 'day', string duration )
 ```
 
 #### Mailing Lists: <https://documentation.mailgun.com/api-mailinglists.html>
@@ -51,6 +59,12 @@ createListMembers( required string listaddress, required json members, boolean u
 ```
 
 # Changelog
+
+## 2017-11-13
+
+### Added
+* Method `getStoredMessage()`, to retrieve an inbound message that has been stored via the Mailgun's `store()` action, using the URL found in the stored event
+* Option `getStats()`, to return a domain's event statistics
 
 ## 2017-07-09
 
