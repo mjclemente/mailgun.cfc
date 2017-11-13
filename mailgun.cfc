@@ -46,6 +46,14 @@ component output="false" displayname="MainGun.cfc"  {
     return apiCall( "/#trim( domain )#/messages", setupParams( arguments ), "post" );
   }
 
+  /**
+  * @hint The URL messages are stored at is different than the standard API endpoint. Furthermore, the URL where a message is stored is only returned from 1) a webhook or 2) a previous api call. Consequently, the structure of this method is a little different than others.
+  * @messageUrl The complete url location the message is stored at. Returned from a webhook for the message, or an api call to the events endpoint for stored messages
+  */
+  public struct function getStoredMessage( string messageUrl ) {
+    return apiCall( messageUrl, [], "get" );
+  }
+
   //STATS
   public struct function getStats( string domain = variables.domain, required string event, date start = '#now()#-7', date end = '#now()#', string resolution = 'day', string duration  ) {
 
