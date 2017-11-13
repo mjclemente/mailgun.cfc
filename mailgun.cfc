@@ -19,7 +19,7 @@ component output="false" displayname="MainGun.cfc"  {
   variables.utcBaseDate = dateAdd( "l", createDate( 1970,1,1 ).getTime() * -1, createDate( 1970,1,1 ) );
   variables.integerFields = [ "limit", "skip" ];
   variables.numericFields = [  ];
-  variables.timestampFields = [ "deliverytime" ];
+  variables.timestampFields = [ "deliverytime", "start", "end" ];
   variables.booleanFields = [ "mailbox_verification", "dkim", "testmode", "tracking", "tracking-clicks", "tracking-opens", "require-tls", "skip-verification", "subscribed", "upsert" ];
   variables.arrayFields = [ "attachment", "inline", "tag" ];
   variables.fileFields = [ "attachment", "inline" ];
@@ -44,6 +44,12 @@ component output="false" displayname="MainGun.cfc"  {
   public struct function sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } ) {
 
     return apiCall( "/#trim( domain )#/messages", setupParams( arguments ), "post" );
+  }
+
+  //STATS
+  public struct function getStats( string domain = variables.domain, required string event, date start = '#now()#-7', date end = '#now()#', string resolution = 'day', string duration  ) {
+
+    return apiCall( "/#trim( domain )#/stats/total", setupParams( arguments ), "get" );
   }
 
   //Mailing Lists
