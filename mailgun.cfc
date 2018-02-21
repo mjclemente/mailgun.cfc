@@ -1,4 +1,5 @@
-/*
+<cfscript>
+	/*
   Copyright (c) 2015, Matthew Clemente, John Berquist
   v0.2.0
 
@@ -14,7 +15,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
-component output="false" displayname="MainGun.cfc"  {
+component output="false" displayname="MailGun.cfc"  {
 
   variables.utcBaseDate = dateAdd( "l", createDate( 1970,1,1 ).getTime() * -1, createDate( 1970,1,1 ) );
   variables.integerFields = [ "limit", "skip" ];
@@ -41,9 +42,9 @@ component output="false" displayname="MainGun.cfc"  {
     return apiCall( "/address#private ? '/private' : ''#/validate", setupParams( arguments ), "get", private );
   }
 
-  public struct function sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } ) {
+  public struct function sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { }, string recipient_variables ) {
 
-    return apiCall( "/#trim( domain )#/messages", setupParams( arguments ), "post" );
+	return apiCall( "/#trim( domain )#/messages", setupParams( arguments ), "post" );
   }
 
   /**
@@ -112,6 +113,13 @@ component output="false" displayname="MainGun.cfc"  {
 
   // PRIVATE FUNCTIONS
   private struct function apiCall( required string path, array params = [ ], string method = "get", boolean private = true )  {
+
+	// change CF-friendly 'recipient_variables' to MG-required 'recipient-variables',  if needed
+	for (var S in params) {
+		if (structkeyexists(S,'name') && lcase(S.name) EQ 'recipient_variables') {
+			S.name='recipient-variables';
+		}
+	}
 
     //if relative path (default), append to base. If not, assume full url (retrieving messages), and use it
     var fullApiPath = path.left( 1 ) == '/' ? variables.baseUrl & path : path;
@@ -336,3 +344,7 @@ component output="false" displayname="MainGun.cfc"  {
   }
 
 }
+
+
+</cfscript>
+
