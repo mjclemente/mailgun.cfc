@@ -1,7 +1,7 @@
 # mailguncfc
 A CFML wrapper for the MailGun API
 
-This project borrows heavily from the API framework built by [jcberquist](https://github.com/jcberquist) with [stripecfc](https://github.com/jcberquist/stripecfc).
+This project borrows heavily from the API framework built by [jcberquist](https://github.com/jcberquist) with [stripecfc](https://github.com/jcberquist/stripecfc). Because it draws on that project, it is also licensed under the terms of the Apache License, Version 2.0.
 
 Your account credentials can be found on the dashboard of your Mailgun account: <https://mailgun.com/app/dashboard>.
 
