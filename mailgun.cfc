@@ -40,9 +40,15 @@ component output="false" displayname="MainGun.cfc"  {
     return apiCall( "/address#private ? '/private' : ''#/validate", setupParams( arguments ), "get", private );
   }
 
-  public struct function sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { } ) {
+  public struct function sendMessage( string domain = variables.domain, required string from, required string to, string cc, string bcc, string subject, string text = "", string html = "", any attachment, any inline, struct o = { }, struct h = { }, struct v = { }, any recipient_variables ) {
 
-    return apiCall( "/#trim( domain )#/messages", setupParams( arguments ), "post" );
+    var params = structCopy( arguments );
+    if ( structKeyExists( params, 'recipient_variables' ) ) {
+      structDelete( params, 'recipient_variables' );
+      params[ 'recipient-variables' ] = isStruct( arguments.recipient_variables ) ? serializeJSON( arguments.recipient_variables ) : arguments.recipient_variables;
+    }
+
+    return apiCall( "/#trim( domain )#/messages", setupParams( params ), "post" );
   }
 
   /**
