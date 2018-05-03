@@ -9,6 +9,50 @@ Your account credentials can be found on the dashboard of your Mailgun account: 
 
 Currently both your Secret API Key and your Public API Key must be provided. The Secret API Key is used for most operations. In prior versions, email validation calls used the Public API Key. However, now that Mailgun has moved to a usage based pricing model for their email validation, the default for email validation calls is also to use the Secret API Key. The Public API Key requirement will likely be removed in later versions. It's currently included, so that calls can explicitly be made to the public endpoint of the email validation API.
 
+# Installation
+This wrapper can be installed as standalone or as a ColdBox Module. Either approach requires a simple CommandBox command:
+
+`box install mailguncfc`
+
+## Standalone
+
+This component will be installed into a directory called `mailguncfc` in whichever directory you have chosen and can then be instantiated directly like so:
+
+```
+new mailguncfc.mailgun(
+	secretApiKey  = '', // Required
+	publicApiKey  = '', // Required
+	domain        = '', // Default value in init
+	baseUrl       = 'https://api.mailgun.net/v3', // Default value in init
+	forceTestMode = false, // Default value in init
+	httpTimeout   = 60, // Default value in init
+	includeRaw    = true // Default value in init
+);
+```
+
+## ColdBox Module
+
+To use the component as a ColdBox Module you will need to create a configuration object in your applications configuration file: `config/Coldbox.cfc` with the following settings:
+
+```
+mailGun = {
+	secretApiKey  = '', // Required
+	publicApiKey  = '', // Required
+	domain        = '', // Default value in init
+	baseUrl       = 'https://api.mailgun.net/v3', // Default value in init
+	forceTestMode = false, // Default value in init
+	httpTimeout   = 60, // Default value in init
+	includeRaw    = true // Default value in init
+}
+```
+
+You can then leverage the CFC via the injection DSL: `mailGun@mailGun`:
+
+```
+property name="mailGun" inject="mailGun@mailGun";
+```
+
+
 # Getting Started
 
 ```cfc
