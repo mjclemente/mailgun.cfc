@@ -6,7 +6,6 @@ component {
 	this.description = "A wrapper for the MailGun API";
 
 	function configure(){
-
 		settings = {
 			secretApiKey  = '', // Required
 			publicApiKey  = '', // Required
