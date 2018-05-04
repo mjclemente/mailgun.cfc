@@ -5,12 +5,8 @@ component {
 	this.webURL = "https://github.com/mjclemente/mailgun.cfc";
 	this.description = "A wrapper for the MailGun API";
 
-	/**
-	 * Configure
-	 */
 	function configure(){
 
-		// Settings
 		settings = {
 			secretApiKey  = '', // Required
 			publicApiKey  = '', // Required
@@ -22,14 +18,10 @@ component {
 		};
 	}
 
-	/**
-	* Fired when the module is registered and activated.
-	*/
 	function onLoad(){
 		parseParentSettings();
 		var mailGunAPISettings = controller.getConfigSettings().mailGun;
 
-		// Map Library
 		binder.map( "mailGun@mailGun" )
 			.to( "#moduleMapping#.mailgun" )
 			.initArg( name="secretApiKey", value=mailGunAPISettings.secretApiKey )
@@ -41,15 +33,9 @@ component {
 			.initArg( name="includeRaw", value=mailGunAPISettings.includeRaw );
 	}
 
-	/**
-	* Fired when the module is unregistered and unloaded
-	*/
 	function onUnload(){
 	}
 
-	/**
-	* parse parent settings
-	*/
 	private function parseParentSettings(){
 		var oConfig      = controller.getSetting( "ColdBoxConfig" );
 		var configStruct = controller.getConfigSettings();
