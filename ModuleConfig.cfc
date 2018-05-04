@@ -30,6 +30,6 @@ component {
         httpTimeout = settings.httpTimeout,
         includeRaw = settings.includeRaw
       );
-}
+  }
 
 }
