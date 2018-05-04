@@ -19,7 +19,7 @@ component {
 	}
 
   function onLoad() {
-    binder.map( "mailGun@mailGun" )
+    binder.map( "mailgun@mailguncfc" )
       .to( "#moduleMapping#.mailgun" )
       .asSingleton()
       .initWith(
