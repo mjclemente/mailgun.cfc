@@ -1,19 +1,9 @@
 component {
 
-	// Module Properties
-	this.title              = "MailGun API";
-	this.author             = "Matthew Clemente";
-	this.webURL             = "";
-	this.description        = "This module will provide you with connectivity to the MailGun API for any ColdFusion (CFML) application.";
-	this.version            = "@version.number@+@build.number@";
-	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
-	this.viewParentLookup   = true;
-	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
-	this.layoutParentLookup = true;
-	this.entryPoint         = 'mailGun';
-	this.modelNamespace     = 'mailGun';
-	this.cfmapping          = 'mailGun';
-	this.autoMapModels      = false;
+	this.title = "MailGun API";
+	this.author = "Matthew J. Clemente";
+	this.webURL = "https://github.com/mjclemente/mailgun.cfc";
+	this.description = "A wrapper for the MailGun API";
 
 	/**
 	 * Configure
