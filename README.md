@@ -9,7 +9,7 @@ This project borrows heavily from the API framework built by [jcberquist](https:
 - [Standalone Usage](#standalone-usage)
 - [Use as a ColdBox Module](#use-as-a-coldbox-module)
 - [Available Methods](#available-methods)
-- [Credentials](#credentials)
+- [Mailgun Account Credentials](#mailgun-account-credentials)
 - [Questions](#questions)
 - [Contributing](#contributing)
 - [Changelog](#changelog)
@@ -17,7 +17,9 @@ This project borrows heavily from the API framework built by [jcberquist](https:
 # Installation
 This wrapper can be installed as standalone component or as a ColdBox Module. Either approach requires a simple CommandBox command:
 
-`box install mailguncfc`
+```
+$ box install mailguncfc
+```
 
 If you can't use CommandBox, all you need to use this wrapper as a standalone component is the `mailgun.cfc` file; just add it to your application wherever you store cfcs. But you should really be using CommandBox.
 
@@ -26,7 +28,11 @@ If you can't use CommandBox, all you need to use this wrapper as a standalone co
 This component will be installed into a directory called `mailguncfc` in whichever directory you have chosen and can then be instantiated directly like so:
 
 ```cfc
-mailgun = new mailguncfc.mailgun( secretApiKey = 'key-xxx', publicApiKey = 'pubkey-xxx', domain = 'yourdomain.com' );
+mailgun = new mailguncfc.mailgun(
+  secretApiKey = 'key-xxx',
+  publicApiKey = 'pubkey-xxx',
+  domain = 'yourdomain.com'
+);
 ```
 
 # Use as a ColdBox Module
@@ -93,7 +99,7 @@ createListMember( required string listaddress, required string address, string n
 createListMembers( required string listaddress, required json members, boolean upsert = false )
 ```
 
-# Credentials
+# Mailgun Account Credentials
 Your account credentials can be found on the dashboard of your Mailgun account: <https://mailgun.com/app/dashboard>.
 
 ![Mailgun API Keys](/assets/images/api-keys.png)
@@ -113,13 +119,13 @@ Changes should be submitted as Pull Requests on the `develop` branch.
 # Changelog
 
 ## 2018-05-04
-Thanks @coldfumonkeh
+Thanks [@coldfumonkeh](https://github.com/coldfumonkeh)
 
 ### Added
 * Ability to use as a ColdBox module
 
 ## 2018-04-26
-Thanks @ericleversen
+Thanks [@ericleversen](https://github.com/ericleversen)
 
 ### Added
 * `recipient_variables` support to `sendMessage()`
@@ -142,7 +148,7 @@ Thanks @ericleversen
 
 ## 2016-12-29
 
-Thanks @mjhagen
+Thanks [@mjhagen](https://github.com/mjhagen)
 
 ### Added
 * Two list management functions:
