@@ -19,7 +19,7 @@ component output="false" displayname="MainGun.cfc"  {
   variables.integerFields = [ "limit", "skip" ];
   variables.numericFields = [  ];
   variables.timestampFields = [ "deliverytime", "start", "end" ];
-  variables.booleanFields = [ "mailbox_verification", "dkim", "testmode", "tracking", "tracking-clicks", "tracking-opens", "require-tls", "skip-verification", "subscribed", "upsert" ];
+  variables.booleanFields = [ "mailbox_verification", "dkim", "testmode", "tracking", "tracking-opens", "require-tls", "skip-verification", "subscribed", "upsert" ];
   variables.arrayFields = [ "attachment", "inline", "tag" ];
   variables.fileFields = [ "attachment", "inline" ];
   variables.dictionaryFields = {
