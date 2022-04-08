@@ -1,56 +1,52 @@
 {
-    "name":"Mailgun.cfc",
-    "version":"0.5.2",
-    "author":"Matthew Clemente <mjclemente@gmail.com>",
-    "location":"mjclemente/mailgun.cfc#v0.5.2",
-    "homepage":"https://github.com/mjclemente/mailgun.cfc",
-    "documentation":"",
-    "repository":{
-        "type":"",
-        "URL":""
-    },
-    "bugs":"",
-    "slug":"mailguncfc",
-    "shortDescription":"A CFML wrapper for the MailGun API",
-    "description":"",
-    "instructions":"",
-    "changelog":"",
-    "type":"modules",
-    "keywords":"mailgun, api, email",
-    "private":false,
-    "projectURL":"",
-    "license":[
-        {
-            "type":"",
-            "URL":""
-        }
-    ],
-    "contributors":[],
-    "dependencies":{},
-    "devDependencies":{},
-    "installPaths":{},
-    "scripts":{},
-    "ignore":[
-        "**/.*",
-        "test",
-        "tests"
-    ],
-    "testbox":{
-        "runner":[
-            {
-                "default":""
-            }
-        ],
-        "labels":"",
-        "reporter":"",
-        "bundles":"",
-        "recurse":true,
-        "directory":"tests.specs",
-        "testBundles":"",
-        "testSuites":"",
-        "testSpecs":"",
-        "verbose":true,
-        "watchDelay":500,
-        "watchPaths":"**.cfc"
+  "name": "Mailgun.cfc",
+  "version": "0.5.3",
+  "author": "Matthew Clemente <mjclemente@gmail.com>",
+  "location": "mjclemente/mailgun.cfc#v0.5.3",
+  "homepage": "https://github.com/mjclemente/mailgun.cfc",
+  "documentation": "https://github.com/mjclemente/mailgun.cfc",
+  "repository": {
+    "type": "git",
+    "URL": "https://github.com/mjclemente/mailgun.cfc"
+  },
+  "bugs": "https://github.com/mjclemente/mailgun.cfc/issues",
+  "slug": "mailguncfc",
+  "shortDescription": "A CFML wrapper for the MailGun API",
+  "description": "",
+  "instructions": "",
+  "changelog": "",
+  "type": "modules",
+  "keywords": ["mailgun", "api", "email"],
+  "private": false,
+  "projectURL": "https://github.com/mjclemente/mailgun.cfc",
+  "license": [
+    {
+      "type": "",
+      "URL": ""
     }
+  ],
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {},
+  "installPaths": {},
+  "scripts": {},
+  "ignore": ["**/.*", "test", "tests"],
+  "testbox": {
+    "runner": [
+      {
+        "default": ""
+      }
+    ],
+    "labels": "",
+    "reporter": "",
+    "bundles": "",
+    "recurse": true,
+    "directory": "tests.specs",
+    "testBundles": "",
+    "testSuites": "",
+    "testSpecs": "",
+    "verbose": true,
+    "watchDelay": 500,
+    "watchPaths": "**.cfc"
+  }
 }
