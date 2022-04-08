@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-component output="false" displayname="MainGun.cfc"  {
+component output="false" displayname="MailGun.cfc"  {
 
   variables.utcBaseDate = dateAdd( "l", createDate( 1970,1,1 ).getTime() * -1, createDate( 1970,1,1 ) );
   variables.integerFields = [ "limit", "skip" ];
