@@ -35,6 +35,21 @@ mailgun = new mailguncfc.mailgun(
 );
 ```
 
+With all optional arguments included
+
+```cfc
+mailgun = new mailguncfc.mailgun(
+  secretApiKey      = 'key-xxx',
+  publicApiKey      = 'pubkey-xxx',
+  domain            = 'yourdomain.com',
+  baseUrl           = 'https://api.mailgun.net/v3',
+  forceTestMode     = false,
+  httpTimeout       = 60, 
+  includeRaw        = true, 
+  webhookSigningKey = 'key-xxx'
+);
+```
+
 # Use as a ColdBox Module
 
 To use the wrapper as a ColdBox Module you will need to pass the configuration settings in from your `config/Coldbox.cfc`. This is done within the `moduleSettings` struct:
@@ -98,6 +113,13 @@ createListMember( required string listaddress, required string address, string n
 
 createListMembers( required string listaddress, required json members, boolean upsert = false )
 ```
+
+#### Webhooks: https://documentation.mailgun.com/en/latest/user_manual.html?#webhooks-1
+
+```
+verifySignature( required any timestamp, required string token, required string signature )
+```
+
 
 # Mailgun Account Credentials
 Your account credentials can be found on the dashboard of your Mailgun account: <https://mailgun.com/app/dashboard>.
