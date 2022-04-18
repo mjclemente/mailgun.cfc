@@ -149,7 +149,7 @@ Thanks [@daamsie](https://github.com/daamsie)
 
 #### Added
 
-- Ability to use as a ColdBox module
+- Method `verifySignature()` to verify Mailgun webhook signatures
 
 ### 2018-05-04
 
