@@ -1,8 +1,8 @@
 {
   "name": "Mailgun.cfc",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "author": "Matthew Clemente <mjclemente@gmail.com>",
-  "location": "mjclemente/mailgun.cfc#v0.5.3",
+  "location": "mjclemente/mailgun.cfc#v0.6.0",
   "homepage": "https://github.com/mjclemente/mailgun.cfc",
   "documentation": "https://github.com/mjclemente/mailgun.cfc",
   "repository": {

@@ -7,13 +7,14 @@ component {
 
 	function configure(){
 		settings = {
-			secretApiKey  = '', // Required
-			publicApiKey  = '', // Required
-			domain        = '', // Default value in init
-			baseUrl       = 'https://api.mailgun.net/v3', // Default value in init
-			forceTestMode = false, // Default value in init
-			httpTimeout   = 60, // Default value in init
-			includeRaw    = true // Default value in init
+			secretApiKey      = '', // Required
+			publicApiKey      = '', // Required
+			domain            = '', // Default value in init
+			baseUrl           = 'https://api.mailgun.net/v3', // Default value in init
+			forceTestMode     = false, // Default value in init
+			httpTimeout       = 60, // Default value in init
+			includeRaw        = true, // Default value in init,
+			webhookSigningKey = '' // Default value in init
 		};
 	}
 
@@ -28,7 +29,8 @@ component {
         baseUrl = settings.baseUrl,
         forceTestMode = settings.forceTestMode,
         httpTimeout = settings.httpTimeout,
-        includeRaw = settings.includeRaw
+        includeRaw = settings.includeRaw,
+        webhookSigningKey = settings.webhookSigningKey
       );
   }
 

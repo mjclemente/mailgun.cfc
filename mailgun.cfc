@@ -28,7 +28,7 @@ component output="false" displayname="MailGun.cfc"  {
     v = { required = [ ], optional = [ ] }
   };
 
-  public any function init( required string secretApiKey, required string publicApiKey, string domain = "", string baseUrl = "https://api.mailgun.net/v3", boolean forceTestMode = false, numeric httpTimeout = 60, boolean includeRaw = true ) {
+  public any function init( required string secretApiKey, required string publicApiKey, string domain = "", string baseUrl = "https://api.mailgun.net/v3", boolean forceTestMode = false, numeric httpTimeout = 60, boolean includeRaw = true, string webhookSigningKey = "" ) {
 
     structAppend( variables, arguments );
     return this;
@@ -113,7 +113,17 @@ component output="false" displayname="MailGun.cfc"  {
     return apiCall( "/#trim( domain )#/bounces", setupParams( arguments ), "get" );
   }
 
+  // Verify a Mailgun webhook signature. 
+  public boolean function verifySignature( required any timestamp, required string token, required string signature ) {
+    if ( variables.webhookSigningKey eq "" ) {
+      throw("Mailgun needs to be initialised with your Webhook Signing Key");
+    }
 
+    var timestampAndToken = timestamp & token;
+    var computedSignature = hmac(timestampAndToken, variables.webhookSigningKey, "HMACSHA256", "us-ascii")
+
+    return computedSignature eq signature;
+  }
 
   // PRIVATE FUNCTIONS
   private struct function apiCall( required string path, array params = [ ], string method = "get", boolean private = true )  {
