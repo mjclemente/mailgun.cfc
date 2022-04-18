@@ -1,9 +1,10 @@
 # mailguncfc
+
 A CFML wrapper for the MailGun API
 
 This project borrows heavily from the API framework built by [jcberquist](https://github.com/jcberquist) with [stripecfc](https://github.com/jcberquist/stripecfc). Because it draws on that project, it is also licensed under the terms of the Apache License, Version 2.0.
 
-# Table of Contents
+## Table of Contents
 
 - [Installation](#installation)
 - [Standalone Usage](#standalone-usage)
@@ -14,16 +15,17 @@ This project borrows heavily from the API framework built by [jcberquist](https:
 - [Contributing](#contributing)
 - [Changelog](#changelog)
 
-# Installation
+## Installation
+
 This wrapper can be installed as standalone component or as a ColdBox Module. Either approach requires a simple CommandBox command:
 
-```
-$ box install mailguncfc
+```bash
+box install mailguncfc
 ```
 
 If you can't use CommandBox, all you need to use this wrapper as a standalone component is the `mailgun.cfc` file; just add it to your application wherever you store cfcs. But you should really be using CommandBox.
 
-# Standalone Usage
+## Standalone Usage
 
 This component will be installed into a directory called `mailguncfc` in whichever directory you have chosen and can then be instantiated directly like so:
 
@@ -35,7 +37,7 @@ mailgun = new mailguncfc.mailgun(
 );
 ```
 
-With all optional arguments included
+And, here's an example of the kitchen-sink initialization, with all available options:
 
 ```cfc
 mailgun = new mailguncfc.mailgun(
@@ -44,13 +46,13 @@ mailgun = new mailguncfc.mailgun(
   domain            = 'yourdomain.com',
   baseUrl           = 'https://api.mailgun.net/v3',
   forceTestMode     = false,
-  httpTimeout       = 60, 
-  includeRaw        = true, 
+  httpTimeout       = 60,
+  includeRaw        = true,
   webhookSigningKey = 'key-xxx'
 );
 ```
 
-# Use as a ColdBox Module
+## Use as a ColdBox Module
 
 To use the wrapper as a ColdBox Module you will need to pass the configuration settings in from your `config/Coldbox.cfc`. This is done within the `moduleSettings` struct:
 
@@ -66,12 +68,12 @@ moduleSettings = {
 
 You can then leverage the CFC via the injection DSL: `mailgun@mailguncfc`:
 
-```
+```cfc
 property name="mailgun" inject="mailgun@mailguncfc";
 ```
 
+## Available Methods
 
-# Available Methods
 ***Note that the Mailgun API has more methods available. This is a list of those currently available in this wrapper. I'll be adding more as time permits and needs dictate.***
 
 #### Validation: <https://documentation.mailgun.com/api-email-validation.html>
@@ -116,67 +118,84 @@ createListMembers( required string listaddress, required json members, boolean u
 
 #### Webhooks: https://documentation.mailgun.com/en/latest/user_manual.html?#webhooks-1
 
-```
+```cfc
 verifySignature( required any timestamp, required string token, required string signature )
 ```
 
+## Mailgun Account Credentials
 
-# Mailgun Account Credentials
 Your account credentials can be found on the dashboard of your Mailgun account: <https://mailgun.com/app/dashboard>.
 
 ![Mailgun API Keys](/assets/images/api-keys.png)
 
 Currently both your Secret API Key and your Public API Key must be provided. The Secret API Key is used for most operations. In prior versions, email validation calls used the Public API Key. However, now that Mailgun has moved to a usage based pricing model for their email validation, the default for email validation calls is also to use the Secret API Key. The Public API Key requirement will likely be removed in later versions. It's currently included, so that calls can explicitly be made to the public endpoint of the email validation API.
 
-# Questions
+## Questions
+
 For questions that aren't about bugs, feel free to hit me up on the [CFML Slack Channel](http://cfml-slack.herokuapp.com); I'm @mjclemente. You'll likely get a much faster response than creating an issue here.
 
-# Contributing
+## Contributing
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
 Before putting the work into creating a PR, I'd appreciate it if you opened an issue. That way we can discuss the best way to implement changes/features, before work is done.
 
 Changes should be submitted as Pull Requests on the `develop` branch.
 
-# Changelog
+## Changelog
 
-## 2018-05-04
+### 2022-04-18
+
+Thanks [@daamsie](https://github.com/daamsie)
+
+#### Added
+
+- Ability to use as a ColdBox module
+
+### 2018-05-04
+
 Thanks [@coldfumonkeh](https://github.com/coldfumonkeh)
 
-### Added
-* Ability to use as a ColdBox module
+#### Added
 
-## 2018-04-26
+- Ability to use as a ColdBox module
+
+### 2018-04-26
+
 Thanks [@ericleversen](https://github.com/ericleversen)
 
-### Added
-* `recipient_variables` support to `sendMessage()`
+#### Added
 
-## 2017-11-13
+- `recipient_variables` support to `sendMessage()`
 
-### Added
-* Method `getStoredMessage()`, to retrieve an inbound message that has been stored via the Mailgun's `store()` action, using the URL found in the stored event
-* Option `getStats()`, to return a domain's event statistics
+### 2017-11-13
 
-## 2017-07-09
+#### Added
 
-### Added
-* Option `mailbox_verification`, to validate(), to enable a mailbox verification check to be performed against the address.
-* Option `private`, to validate(), to override default and call public API endpoint
+- Method `getStoredMessage()`, to retrieve an inbound message that has been stored via the Mailgun's `store()` action, using the URL found in the stored event
+- Option `getStats()`, to return a domain's event statistics
 
-### Changed
-* validate() now defaults to the private API endpoint
+### 2017-07-09
 
+#### Added
 
-## 2016-12-29
+- Option `mailbox_verification`, to validate(), to enable a mailbox verification check to be performed against the address.
+- Option `private`, to validate(), to override default and call public API endpoint
+
+#### Changed
+
+- `validate()` now defaults to the private API endpoint
+
+### 2016-12-29
 
 Thanks [@mjhagen](https://github.com/mjhagen)
 
-### Added
-* Two list management functions:
- * createList()
- * createListMembers()
+#### Added
 
-### Changed
-* Expanded the error reporting by deserializing the returned message
+- Two list management functions:
+- createList()
+- createListMembers()
+
+#### Changed
+
+- Expanded the error reporting by deserializing the returned message
 and adding that to the error detail.
